@@ -1,0 +1,10 @@
+[build]
+target = "avr-none"
+
+[target.'cfg(target_arch = "avr")']
+runner = "ravedude"
+linker = "avr-gcc"
+rustflags = ["-Ctarget-cpu=attiny402", "-Cpanic=abort", "-Clink-arg=-mshort-calls"]
+
+[unstable]
+build-std = ["core", "panic_abort"]

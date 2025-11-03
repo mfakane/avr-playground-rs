@@ -1,0 +1,22 @@
+[general]
+port = "/dev/ttyUSB0"
+serial-baudrate = 57600
+open-console = true
+output-mode = "ascii"
+
+[board]
+name = "tiny402"
+
+[board.reset]
+# The board automatically resets when attempting to flash
+automatic = true
+
+[board.avrdude]
+# avrdude configuration
+programmer = "serialupdi"
+partno = "t402"
+baudrate = -1
+do-chip-erase = true
+
+# For documentation about this file, check here:
+# https://github.com/Rahix/avr-hal/blob/main/ravedude/README.md#ravedudetoml-format

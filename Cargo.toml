@@ -1,0 +1,34 @@
+[package]
+name = "led"
+version = "0.1.0"
+authors = ["mfakane <509998+mfakane@users.noreply.github.com>"]
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "led"
+harness = false # do not use the built in cargo test harness -> resolve rust-analyzer errors
+
+[dependencies]
+embedded-hal = "1.0.0"
+panic-halt = "1.0.0"
+ufmt = "0.2.0"
+nb = "1.1.0"
+avr-device = { version = "0.7", features = ["rt", "attiny402"] }
+
+# Configure the build for minimal size - AVRs have very little program memory
+[profile.dev]
+debug = false    # Remove debug info to save space
+panic = "abort"
+lto = true
+opt-level = "z"  # Optimize for size
+strip = "debuginfo"
+codegen-units = 1
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+debug = false
+lto = true
+opt-level = "z"
+strip = "debuginfo"
